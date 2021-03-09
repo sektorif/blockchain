@@ -46,10 +46,6 @@ contract Test
         string phoneNumber;
     }
     
-    Owner private owner;
-    Home private home;
-    Request private request;
-    Employee private employee;
 
     mapping(address => Employee) private employees;
 	mapping(address => Owner) private owners;
@@ -59,35 +55,16 @@ contract Test
 	mapping(string => Ownership[]) private ownerships;
 	
 
-	function AddHome (string _adr, fixed _area, int _cost) public {
-		Home memory h;
-		h.homeAddress = _adr;
-		h.area = _area;
-		h.cost = _cost;
-		homes[_adr] = h
-	}
+    function AddHome(string memory _adr, uint _area, uint _cost) public {
+        Home memory h;
+        h.homeAddress = _adr;
+        h.area = _area;
+        h.cost = _cost;
+        homes[_adr] = h;
+    }
+    function GetHome(string memory adr) public returns (uint _area, uint _cost){
+        return (homes[adr].area, homes[adr].cost);
+    }
 
-	function GetHome (string adr) public returns (fixed _area, int _cost){
-		return (homes[adr].area, homes[adr].cost);
-	}
 
-    function SetRequest(int _requestType, string _homeAddress, fixed _area, uint _cost,  ) public
-    {
-        
-    }
-    
-    function Test1(string memory Message) public 
-    {
-        message = Message;
-    }
-    
-    function SetMessage(string memory newMessage) public
-    {
-        message = newMessage;
-    }
-    
-    function GetMessage() public returns (string memory)
-    {
-        return message;
-    }
 }
