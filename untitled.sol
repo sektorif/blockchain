@@ -94,7 +94,7 @@ contract ROSReestr is Owned
     {
         require(
             msg.value >= value,
-            'Not enough funds'
+            'A hde?'
             );
         _;
     }
