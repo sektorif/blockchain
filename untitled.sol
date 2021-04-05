@@ -1,60 +1,51 @@
 contract Test
 {
-	enum RequestType {NewHome, EditHome}
-	enum HomeStatus {active, inactive}
+    enum RequestType{NewHome, EditHome}
+    
 
-
- 	struct Ownership
-    {
+    struct Owner{
         string name;
         uint passSer;
         uint passNum;
         uint256 date;
         string phoneNumber;
     }
-
-    struct Owner
+    
+        struct Ownership
     {
-        string name;
-        uint passSer;
-        uint passNum;
-        uint256 date;
-        string phoneNumber;
-    }
+        string homeAddress;
+        address owner;
+        uint p;
+    }   
     
     struct Home
     {
         string homeAddress;
-        fixed area;
-        address owner;
+        uint area;
         uint cost;
-        HomeStatus status;
     }
     
     struct Request
     {
-        int requestType;
+        RequestType requestType;
         Home home;
-        int result;
+        uint result;
         address adr;
     }
     
     struct Employee
     {
-        string name;
+        string nameEmployee;
         string position;
         string phoneNumber;
     }
     
-
     mapping(address => Employee) private employees;
-	mapping(address => Owner) private owners;
-	//ket is request initiator
-	mapping(address => Request) private requests;
-	mapping(string => Home) private homes;
-	mapping(string => Ownership[]) private ownerships;
-	
-
+    mapping(address => Owner) private owners;
+    mapping(address => Request) private requests;
+    mapping(string => Home) private homes;
+    mapping(string => Ownership[]) private ownerships;
+    
     function AddHome(string memory _adr, uint _area, uint _cost) public {
         Home memory h;
         h.homeAddress = _adr;
@@ -62,9 +53,8 @@ contract Test
         h.cost = _cost;
         homes[_adr] = h;
     }
-    function GetHome(string memory adr) public returns (uint _area, uint _cost){
+    
+    function GetHome (string memory adr) public returns (uint _area, uint _cost){
         return (homes[adr].area, homes[adr].cost);
     }
-
-
 }
